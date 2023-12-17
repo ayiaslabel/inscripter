@@ -29,7 +29,7 @@ const Preloader: React.FC = () => {
       ref={containerRef}
       style={{
         position: 'fixed',
-        background: 'white',
+        background: 'black', // Set the background color to black
         width: '120vw',
         height: '120vh',
         top: '-10vh',
@@ -50,6 +50,7 @@ const Preloader: React.FC = () => {
           margin: '1em 0px',
           zIndex: 1000,
           fontSize: '8px',
+          color: '#45D620',
         }}
         ref={ref}
       />
@@ -75,3 +76,5 @@ const Preloader: React.FC = () => {
 };
 
 export default Preloader;
+
+

@@ -7,10 +7,10 @@ import {
   useChainId,
 } from 'wagmi';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { EthscriptionsAPI } from '../utils/ethscriptionsAPI';
+import { EthscriptionsAPI } from '../utils/scriptionsAPI';
 import { identify, track } from '../utils/analytics';
 
-export function Ethscribe() {
+export function Scribe() {
   const { data, error, isLoading, isError, sendTransaction } =
     useSendTransaction();
 
@@ -35,19 +35,19 @@ export function Ethscribe() {
     console.log('check availability', ownerAddress, isTaken);
     const message = isTaken
       ? `"${text}" text ethscription is already owned by ${ownerAddress}`
-      : `"${text}" ethscription is available! Ethscribe it below`;
+      : `"${text}" ethscription is available! Scribe it below`;
     alert(message);
   }, [encodedText, text]);
 
-  const onEthscribe = useCallback(async () => {
+  const onScribe = useCallback(async () => {
     if (!account || !account.isConnected || !account.address) {
       alert(
-        'You must connect your wallet to ethscribe, or copy the hex and send the transaction manually'
+        'You must connect your wallet to scribe, or copy the hex and send the transaction manually'
       );
       return;
     }
 
-    track('ethscribed', { text, chainId, receiver: account.address });
+    track('scribed', { text, chainId, receiver: account.address });
 
     sendTransaction({
       to: account.address,
@@ -86,40 +86,40 @@ export function Ethscribe() {
   }, [account.address]);
 
   return (
-    <div className="ethscribe-container">
+    <div className="scribe-container">
       <input
         autoFocus
-        className="ethscribe-input"
+        className="scribe-input"
         name="text"
-        placeholder="Text to ethscribe"
+        placeholder="Text to scribe"
         onChange={handleChange}
         value={text}
       />
-      <div className="ethscribe-encoded-text">{encodedText}</div>
-      <div className="ethscribe-hex">{hex}</div>
+      <div className="scribe-encoded-text">{encodedText}</div>
+      <div className="scribe-hex">{hex}</div>
       {chainId === 1 && (
         <button
-          className="ethscribe-button"
+          className="scribe-button"
           type="button"
           onClick={onCheckAvailability}
         >
           CHECK AVAILABILITY
         </button>
       )}
-      <button className="ethscribe-button" type="button" onClick={onCopyHex}>
+      <button className="scribe-button" type="button" onClick={onCopyHex}>
         COPY HEX
       </button>
-      <button className="ethscribe-button" type="button" onClick={onEthscribe}>
+      <button className="scribe-button" type="button" onClick={onScribe}>
         ETHSCRIBE
       </button>
 
-      {isLoading && <div className="ethscribe-message">Check wallet...</div>}
+      {isLoading && <div className="scribe-message">Check wallet...</div>}
       {/* {isPending && (
-        <div className="ethscribe-message">Transaction pending...</div>
+        <div className="scribe-message">Transaction pending...</div>
       )} */}
       {isSuccess && (
         <>
-          <div className="ethscribe-message">
+          <div className="scribe-message">
             Success!{' '}
             <a href={`https://etherscan.io/tx/${data?.hash}`}>View Txn</a>{' '}
             <a href={`https://ethscriptions.com/${account?.address}`}>
@@ -129,10 +129,10 @@ export function Ethscribe() {
         </>
       )}
       {isError && (
-        <div className="ethscribe-message">Error: {error?.message}</div>
+        <div className="scribe-message">Error: {error?.message}</div>
       )}
       <style jsx>{`
-        .ethscribe-container {
+        .scribe-container {
           display: flex;
           flex-direction: column;
           font-family: monospace;
@@ -140,9 +140,9 @@ export function Ethscribe() {
           max-width: 85vw;
         }
 
-        .ethscribe-input,
-        .ethscribe-encoded-text,
-        .ethscribe-hex {
+        .scribe-input,
+        .scribe-encoded-text,
+        .scribe-hex {
           font-size: 16px;
           font-family: monospace;
           margin-bottom: 10px;
@@ -154,7 +154,7 @@ export function Ethscribe() {
           overflow: hidden;
         }
 
-        .ethscribe-button {
+        .scribe-button {
           background-color: #4285f4;
           color: white;
           padding: 10px;
@@ -165,17 +165,17 @@ export function Ethscribe() {
           font-family: monospace;
         }
 
-        .ethscribe-message {
+        .scribe-message {
           margin-top: 20px;
           width: 100%;
           text-align: center;
         }
 
-        .ethscribe-message.success {
+        .scribe-message.success {
           color: green;
         }
 
-        .ethscribe-message.error {
+        .scribe-message.error {
           color: red;
         }
       `}</style>

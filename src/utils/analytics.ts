@@ -17,6 +17,10 @@ export const useMixpanel = () => {
 };
 
 export const identify = (address: string) => {
+  if (!mixpanel.has_opted_in_tracking()) {
+    console.error('Mixpanel not initialized');
+    return;
+  }
   mixpanel.identify(address);
 };
 
@@ -24,5 +28,9 @@ export const track = (
   event: string,
   properties: { [key: string]: any } | undefined
 ) => {
+  if (!mixpanel.has_opted_in_tracking()) {
+    console.error('Mixpanel not initialized');
+    return;
+  }
   mixpanel.track(event, properties);
 };

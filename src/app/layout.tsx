@@ -3,7 +3,7 @@ import { Providers } from './providers';
 import { Analytics } from '@vercel/analytics/react';
 
 export const metadata = {
-  title: 'Ethscriber',
+  title: 'Scripts',
 };
 
 export default function RootLayout({
@@ -13,10 +13,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body style={{ backgroundColor: 'black', color: 'white' }}>
         <Analytics />
         <Providers>{children}</Providers>
       </body>
     </html>
   );
 }
+
+
+

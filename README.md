@@ -1,6 +1,6 @@
-# Ethscriber
+# Scripts
 
-Ethscriber is a simple tool to inscribe text based [ethscriptions](https://ethscriptions.com/). Ethscriptions are a new type of NFT based on ethereum transaction calldata. They are very cheap and easy to mint and share. Ethscriber is a tool to easily inscribe text based ethscriptions.
+Scripts is a simple tool to inscribe text based [ethscriptions](https://ethscriptions.com/). Ethscriptions are a new type of NFT based on ethereum transaction calldata. They are very cheap and easy to mint and share. Scripts is a tool to easily inscribe text based ethscriptions.
 
 
 # Environment
@@ -15,7 +15,7 @@ Once the webpage has loaded, changes made to files inside the `src/` directory (
 
 # Follow Us
 
-Follow ethscriber on [𝕏](https://x.com/ethscriber) or join our [discord](https://discord.gg/Bvkhmf7zGG)
+Follow scripts on [𝕏](https://x.com/scripts) or join our [discord](https://discord.gg/Bvkhmf7zGG)
 
 # Learn more
 

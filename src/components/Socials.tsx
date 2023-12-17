@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Discord from './logo/Discord';
+import Telegram from './logo/Telegram';
 import Twitter from './logo/Twitter';
 
 const Socials: React.FC = () => {
@@ -17,15 +17,15 @@ const Socials: React.FC = () => {
         >
           <div style={{ display: 'flex' }}>
             <a
-              href="https://discord.gg/Bvkhmf7zGG"
+              href="https://t.me/scriptskrß"
               target="_blank"
               rel="noopener noreferrer"
               className="socialLink"
             >
-              <Discord size={22} />
+              <Telegram size={15} />
             </a>
             <a
-              href="https://x.com/ethscriber"
+              href="https://x.com/scriptskr"
               target="_blank"
               rel="noopener noreferrer"
               className="socialLink"
@@ -33,7 +33,7 @@ const Socials: React.FC = () => {
               <Twitter size={18} />
             </a>
           </div>
-          <p style={{ fontFamily: 'monospace' }}>(New!) Follow Ethscriber</p>
+          <p style={{ fontFamily: 'monospace' }}>Follow Scripts</p>
         </div>
         <style jsx>{`
           .socials {

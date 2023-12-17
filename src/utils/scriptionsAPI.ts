@@ -2,7 +2,7 @@ import { sha256 } from './sha256';
 
 export class EthscriptionsAPI {
   baseUrl: string;
-  constructor(baseUrl = 'https://ethscriber.xyz') {
+  constructor(baseUrl = 'https://scripts.xyz') {
     this.baseUrl = baseUrl;
   }
 

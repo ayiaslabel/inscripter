@@ -1,7 +1,6 @@
 import CenteredContainer from '../components/CenteredContainer';
 import { ConnectButton } from '../components/ConnectButton';
-import { Ethscribe } from '../components/Ethscribe';
-import { GithubButton } from '../components/GithubButton';
+import { Scribe } from '../components/Scribe';
 import { Logo } from '../components/Logo';
 import MobileHidden from '../components/MobileHidden';
 import Preloader from '../components/preloader/Preloader';
@@ -25,7 +24,6 @@ function Home() {
         <Logo />
         <div style={{ marginLeft: 10 }} />
         <MobileHidden>
-          <GithubButton />
         </MobileHidden>
       </div>
       <div
@@ -39,10 +37,10 @@ function Home() {
           height: 50,
         }}
       >
-        <ConnectButton />
+        <ConnectButton /> 
       </div>
       <CenteredContainer>
-        <h2 style={{ fontFamily: 'monospace' }}>Ethscriber</h2>
+        <h2 style={{ fontFamily: 'monospace' }}>Scripts</h2>
         <div
           style={{
             fontFamily: 'monospace',
@@ -50,11 +48,9 @@ function Home() {
             textAlign: 'center',
           }}
         >
-          A simple tool to inscribe text{' '}
-          <a href="https://ethscriptions.com/">ethscriptions</a> by{' '}
-          <a href="https://twitter.com/zac_denham">zacque.eth</a>.
+          A simple tool to make and view inscriptions on Kroma Network
         </div>
-        <Ethscribe />
+        <Scribe />
       </CenteredContainer>
       <Socials />
     </>
