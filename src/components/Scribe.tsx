@@ -106,11 +106,11 @@ export function Scribe() {
           CHECK AVAILABILITY
         </button>
       )}
-      <button className="scribe-button" type="button" onClick={onCopyHex}>
+      <button className="scribe-button" type="button" onClick={onCopyHex} style={{ backgroundColor: '#45D620' }}>
         COPY HEX
       </button>
-      <button className="scribe-button" type="button" onClick={onScribe}>
-        ETHSCRIBE
+      <button className="scribe-button" type="button" onClick={onScribe} style={{ backgroundColor: '#45D620' }}>
+        SCRIBE
       </button>
 
       {isLoading && <div className="scribe-message">Check wallet...</div>}
@@ -121,9 +121,9 @@ export function Scribe() {
         <>
           <div className="scribe-message">
             Success!{' '}
-            <a href={`https://etherscan.io/tx/${data?.hash}`}>View Txn</a>{' '}
+            <a href={`https://kromascan.com/tx/${data?.hash}`}>View Txn</a>{' '}
             <a href={`https://ethscriptions.com/${account?.address}`}>
-              View your Ethscriptions
+              View your Scriptions
             </a>
           </div>
         </>
@@ -136,17 +136,41 @@ export function Scribe() {
           display: flex;
           flex-direction: column;
           font-family: monospace;
+          color: black;
+          background-cloor: #CBF9BE;
           width: 475px;
           max-width: 85vw;
         }
 
-        .scribe-input,
-        .scribe-encoded-text,
-        .scribe-hex {
+        .scribe-input {
           font-size: 16px;
           font-family: monospace;
           margin-bottom: 10px;
           background-color: #f7f7f7;
+          padding: 10px;
+          border-radius: 4px;
+          border: none;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+
+        .scribe-encoded-text {
+          font-size: 16px;
+          font-family: monospace;
+          margin-bottom: 10px;
+          background-color: #CBF9BE;
+          padding: 10px;
+          border-radius: 4px;
+          border: none;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+
+        .scribe-hex {
+          font-size: 16px;
+          font-family: monospace;
+          margin-bottom: 10px;
+          background-color: #CBF9BE;
           padding: 10px;
           border-radius: 4px;
           border: none;

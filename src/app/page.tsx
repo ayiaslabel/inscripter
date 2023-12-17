@@ -1,3 +1,5 @@
+'use client';
+
 import CenteredContainer from '../components/CenteredContainer';
 import { ConnectButton } from '../components/ConnectButton';
 import { Scribe } from '../components/Scribe';
@@ -40,7 +42,7 @@ function Home() {
         <ConnectButton /> 
       </div>
       <CenteredContainer>
-        <h2 style={{ fontFamily: 'monospace' }}>Scripts</h2>
+        <h2 style={{ fontFamily: 'monospace' }}>KROMA SCRIPTS</h2>
         <div
           style={{
             fontFamily: 'monospace',
