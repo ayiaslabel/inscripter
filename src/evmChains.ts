@@ -1,55 +1,29 @@
-import {
-  arbitrum,
-  avalanche,
-  base,
-  bsc,
-  mainnet,
-  optimism,
-  polygon,
-  canto,
-  celo,
-  fantom,
-  Chain,
-} from 'wagmi/chains';
+// scripts-kroma/evmChains.ts
+import { Chain } from 'wagmi/chains';
 
-const opBNBMainnet: Chain = {
-  id: 204,
-  network: 'opBNB',
-  name: 'opBNB Mainnet',
+const kromaMainnet: Chain = {
+  id: 255, // Chain ID for Kroma Mainnet
+  network: 'kroma',
+  name: 'Kroma Mainnet',
   nativeCurrency: {
-    name: 'Binance Coin',
-    symbol: 'BNB',
+    name: 'Ether',
+    symbol: 'ETH', // Currency Symbol
     decimals: 18,
   },
   rpcUrls: {
     default: {
-      http: ['https://1rpc.io/opbnb'],
+      http: ['https://api.kroma.network'], // RPC URL
     },
     public: {
-      http: ['https://1rpc.io/opbnb'],
+      http: ['https://api.kroma.network'], // RPC URL
     },
   },
   blockExplorers: {
     default: {
-      name: 'opBNBScan',
-      url: 'https://opbnbscan.com',
+      name: 'KromaScan',
+      url: 'https://kromascan.com', // Block Explorer URL
     },
   },
 };
 
-export const evmChains = [
-  mainnet,
-  arbitrum,
-  avalanche,
-  base,
-  bsc,
-  optimism,
-  polygon,
-  canto,
-  celo,
-  fantom,
-  opBNBMainnet,
-];
-
-
-
+export const evmChains = [kromaMainnet];
