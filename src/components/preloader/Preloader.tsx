@@ -49,7 +49,7 @@ const Preloader: React.FC = () => {
           whiteSpace: 'pre',
           margin: '1em 0px',
           zIndex: 1000,
-          fontSize: '8px',
+          fontSize: '6px',
           color: '#45D620',
         }}
         ref={ref}

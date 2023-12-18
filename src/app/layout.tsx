@@ -1,10 +1,8 @@
+import React from 'react';
+import Header from '../components/Header';
 import '@rainbow-me/rainbowkit/styles.css';
 import { Providers } from './providers';
 import { Analytics } from '@vercel/analytics/react';
-
-export const metadata = {
-  title: 'SCRIPTS',
-};
 
 export default function RootLayout({
   children,
@@ -16,6 +14,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
+      <Header />
       <body style={{ backgroundColor: 'black', color: 'white' }}>
         <Analytics />
         <Providers>{children}</Providers>

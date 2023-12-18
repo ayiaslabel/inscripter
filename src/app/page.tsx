@@ -1,33 +1,11 @@
-'use client';
-
 import CenteredContainer from '../components/CenteredContainer';
 import { ConnectButton } from '../components/ConnectButton';
 import { Scribe } from '../components/Scribe';
-import { Logo } from '../components/Logo';
-import MobileHidden from '../components/MobileHidden';
-import Preloader from '../components/preloader/Preloader';
 import Socials from '../components/Socials';
 
 function Home() {
   return (
     <>
-      <Preloader />
-      <div
-        style={{
-          position: 'fixed',
-          top: 10,
-          left: 10,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: 50,
-        }}
-      >
-        <Logo />
-        <div style={{ marginLeft: 10 }} />
-        <MobileHidden>
-        </MobileHidden>
-      </div>
       <div
         style={{
           position: 'fixed',
@@ -39,7 +17,7 @@ function Home() {
           height: 50,
         }}
       >
-        <ConnectButton /> 
+        <ConnectButton />
       </div>
       <CenteredContainer>
         <h2 style={{ fontFamily: 'monospace' }}>KROMA SCRIPTS</h2>
@@ -50,7 +28,8 @@ function Home() {
             textAlign: 'center',
           }}
         >
-          A simple tool to make and view inscriptions on Kroma Network
+          Inscription Tool Kit For{' '}
+          <a href="https://x.com/kroma_network">@kroma_network</a>
         </div>
         <Scribe />
       </CenteredContainer>
