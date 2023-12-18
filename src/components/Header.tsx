@@ -19,7 +19,7 @@ export default function Header() {
             <Logo />
             <MobileHidden />
             <nav style={{ display: 'flex', justifyContent: 'center' }}>
-                <ul style={{ listStyleType: 'none', display: 'flex', justifyContent: 'center' }}>
+                <ul style={{ listStyleType: 'none', display: 'flex', justifyContent: 'center', gap: '20px' }}>
                     <li>
                         <Link href="/" passHref>
                             <span className={pathname === '/' ? 'link active' : 'link'}>SCRIPTS</span>

@@ -14,10 +14,14 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <Header />
       <body style={{ backgroundColor: 'black', color: 'white' }}>
+        <header> {/* Add a <header> element here */}
+          <Header />
+        </header>
         <Analytics />
-        <Providers>{children}</Providers>
+        <div>
+          <Providers>{children}</Providers>
+        </div>
       </body>
     </html>
   );
