@@ -33,7 +33,7 @@ const Socials: React.FC = () => {
               <Twitter size={18} />
             </a>
           </div>
-          <p style={{ fontFamily: 'monospace' }}>Follow Scripts</p>
+          <p style={{  fontFamily: 'ProtoMono-SemiBold' }}>Follow Scripts</p>
         </div>
         <style jsx>{`
           .socials {
@@ -41,7 +41,7 @@ const Socials: React.FC = () => {
             width: 100vw;
             z-index: 2;
             position: fixed;
-            bottom: 0px;
+            bottom: -3px;
             left: 0px;
             right: 0px;
             justify-content: center;

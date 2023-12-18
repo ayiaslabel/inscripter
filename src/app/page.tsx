@@ -20,10 +20,10 @@ function Home() {
         <ConnectButton />
       </div>
       <CenteredContainer>
-        <h2 style={{ fontFamily: 'monospace' }}>KROMA SCRIPTS</h2>
+        <h2 style={{ fontFamily: 'ProtoMono-SemiBold' }}>KROMA SCRIPTS</h2>
         <div
           style={{
-            fontFamily: 'monospace',
+            fontFamily: 'ProtoMono-Light',
             marginBottom: 25,
             textAlign: 'center',
           }}

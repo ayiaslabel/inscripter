@@ -106,10 +106,10 @@ export function Scribe() {
           CHECK AVAILABILITY
         </button>
       )}
-      <button className="scribe-button" type="button" onClick={onCopyHex} style={{ backgroundColor: '#45D620' }}>
+      <button className="scribe-button" type="button" onClick={onCopyHex} style={{ backgroundColor: '#45D620', fontFamily: 'ProtoMono-SemiBold' }}>
         COPY HEX
       </button>
-      <button className="scribe-button" type="button" onClick={onScribe} style={{ backgroundColor: '#45D620' }}>
+      <button className="scribe-button" type="button" onClick={onScribe} style={{ backgroundColor: '#45D620', fontFamily: 'ProtoMono-SemiBold' }}>
         SCRIBE
       </button>
 

@@ -1,9 +1,15 @@
 'use client';
 
+
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Logo } from './Logo';
 import MobileHidden from './MobileHidden';
+
+import localFont from 'next/font/local'
+ 
+// Font files can be colocated inside of `pages`
+const ProtoMonoSemiBold = localFont({ src: '../../public/fonts/ProtoMono-SemiBold.woff2' })
 
 export default function Header() { 
     const [isClient, setIsClient] = useState(false);
@@ -15,33 +21,31 @@ export default function Header() {
     }, []);
 
     return (
-        <header style={{ position: 'fixed', top: 10, left: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', height: 50 }}>
+        <header style={{ position: 'fixed', top: 10, left: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', height: 50 }}>
             <Logo />
+            <div>
             <MobileHidden />
             <nav style={{ display: 'flex', justifyContent: 'center' }}>
-                <ul style={{ listStyleType: 'none', display: 'flex', justifyContent: 'center', gap: '20px' }}>
+                <ul style={{ listStyleType: 'none', display: 'flex', justifyContent: 'center', gap: '20px', fontFamily: 'ProtoMono-SemiBold', fontWeight: '600' }}>
                     <li>
-                        <Link href="/" passHref>
-                            <span className={pathname === '/' ? 'link active' : 'link'}>SCRIPTS</span>
+                        <Link href="/" style={{ textDecoration: 'none', color: '#ffffff'}} passHref>
+                            <span className="link">SCRIPTS</span>
                         </Link>
                     </li>
                     <li>
-                        <Link href="/live" passHref>
-                            <span className={pathname === '/scripts' ? 'link active' : 'link'}>LIVE</span>
+                        <Link href="/inscriber" style={{ textDecoration: 'none', color: '#ffffff' }} passHref>
+                            <span className="link">INSCRIBER</span>
                         </Link>
                     </li>
                     <li>
-                        <Link href="/explorer" passHref>
-                            <span className={pathname === '/' ? 'link active' : 'link'}>HOME</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/inscribe" passHref>
-                            <span className={pathname === '/' ? 'link active' : 'link'}>INSCRIBE</span>
+                        <Link href="/swap" style={{ textDecoration: 'none', color: '#ffffff' }} passHref>
+                            <span className="link">SWAP</span>
                         </Link>
                     </li>
                 </ul>
             </nav>
+            </div>
         </header>
     );
 }
+

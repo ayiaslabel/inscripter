@@ -1,3 +1,4 @@
+import '../../global.css';
 import React from 'react';
 import Header from '../components/Header';
 import '@rainbow-me/rainbowkit/styles.css';
@@ -15,12 +16,15 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body style={{ backgroundColor: 'black', color: 'white' }}>
-        <header> {/* Add a <header> element here */}
-          <Header />
-        </header>
+
         <Analytics />
         <div>
-          <Providers>{children}</Providers>
+          <Providers>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'black', color: 'white', height: '100px' }}>
+              <Header/>
+            </div>
+            {children}
+          </Providers>
         </div>
       </body>
     </html>

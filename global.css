@@ -1,0 +1,22 @@
+@font-face {
+    font-family: "ProtoMono-SemiBold";
+    font-weight: 600;
+    src: url("./public/fonts/ProtoMono-SemiBold.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "ProtoMono-Medium";
+    font-weight: 500;
+    src: url("./public/fonts/ProtoMono-Medium.woff2") format("woff2");
+  }
+  
+  @font-face {
+    font-family: "ProtoMono-Regular";
+    font-weight: 400;
+    src: url("./public/fonts/ProtoMono-Regular.woff2") format("woff2");
+  }
+  
+  @font-face {
+    font-family: "ProtoMono-Light";
+    font-weight: 300;
+    src: url("./public/fonts/ProtoMono-Light.woff2") format("woff2");
+  }
