@@ -1,11 +1,18 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { Logo } from './Logo';
 import MobileHidden from './MobileHidden';
 
 export default function Header() { 
-    const pathname = usePathname();
+    const [isClient, setIsClient] = useState(false);
+    const [pathname, setPathname] = useState('');
+
+    useEffect(() => {
+        setIsClient(true);
+        setPathname(window.location.pathname);
+    }, []);
 
     return (
         <header style={{ position: 'fixed', top: 10, left: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', height: 50 }}>
