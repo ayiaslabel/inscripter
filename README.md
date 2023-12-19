@@ -1,4 +1,4 @@
-# Inscripter
+# inscripter
 
 Inscripter is a Web3 Inscription Interpreter. Currently, the application serves primarily as a simple inscriber for the Kroma Network. We have deployed Kroma's first inscription token [KRO](https://kromascan.com/tx/0xfe672b2bbd9343d000448437fce16a3c21152d07d24a5ec33136ac202bbe2ad8). The KRO token is a unique inscription token within Kroma and may or may not hold value. We invite you to join and experience this new feature in Kroma.
 
