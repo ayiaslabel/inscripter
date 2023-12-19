@@ -16,16 +16,16 @@ const Socials: React.FC = () => {
           }}
         >
           <div style={{ display: 'flex' }}>
-            <a
-              href="https://t.me/scriptskrß"
+            {/* <a
+              href="https://t.me/inscripterio"
               target="_blank"
               rel="noopener noreferrer"
               className="socialLink"
             >
               <Telegram size={15} />
-            </a>
+            </a> */}
             <a
-              href="https://x.com/scriptskr"
+              href="https://x.com/inscripter"
               target="_blank"
               rel="noopener noreferrer"
               className="socialLink"
@@ -33,7 +33,7 @@ const Socials: React.FC = () => {
               <Twitter size={18} />
             </a>
           </div>
-          <p style={{  fontFamily: 'ProtoMono-SemiBold' }}>Follow Scripts</p>
+          <p style={{  fontFamily: 'ProtoMono-SemiBold' }}>Follow @inscripter</p>
         </div>
         <style jsx>{`
           .socials {

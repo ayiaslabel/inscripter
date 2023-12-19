@@ -27,21 +27,21 @@ export default function Header() {
             <MobileHidden />
             <nav style={{ display: 'flex', justifyContent: 'center' }}>
                 <ul style={{ listStyleType: 'none', display: 'flex', justifyContent: 'center', gap: '20px', fontFamily: 'ProtoMono-SemiBold', fontWeight: '600' }}>
-                    <li>
-                        <Link href="/" style={{ textDecoration: 'none', color: '#ffffff'}} passHref>
-                            <span className="link">SCRIPTS</span>
-                        </Link>
-                    </li>
-                    <li>
+                    {/* <li>
                         <Link href="/inscriber" style={{ textDecoration: 'none', color: '#ffffff' }} passHref>
                             <span className="link">INSCRIBER</span>
+                        </Link>
+                    </li> */}
+                    {/* <li>
+                        <Link href="/" style={{ textDecoration: 'none', color: '#ffffff'}} passHref>
+                            <span className="link">SCRIPTS</span>
                         </Link>
                     </li>
                     <li>
                         <Link href="/swap" style={{ textDecoration: 'none', color: '#ffffff' }} passHref>
                             <span className="link">SWAP</span>
                         </Link>
-                    </li>
+                    </li> */}
                 </ul>
             </nav>
             </div>

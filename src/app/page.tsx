@@ -20,7 +20,7 @@ function Home() {
         <ConnectButton />
       </div>
       <CenteredContainer>
-        <h2 style={{ fontFamily: 'ProtoMono-SemiBold' }}>KROMA SCRIPTS</h2>
+        <h2 style={{ fontFamily: 'ProtoMono-SemiBold', color: "#45D620"}}>INSCRIBE</h2>
         <div
           style={{
             fontFamily: 'ProtoMono-Light',
@@ -28,9 +28,9 @@ function Home() {
             textAlign: 'center',
           }}
         >
-          Inscription Tool Kit For{' '}
-          <a href="https://x.com/kroma_network">@kroma_network</a>
-        </div>
+            <span style={{ fontFamily: 'ProtoMono-Light', fontWeight: 'bold' }}>Get First Inscription Token</span>{' '}
+            on <a href="https://kromascan.com/tx/0xfe672b2bbd9343d000448437fce16a3c21152d07d24a5ec33136ac202bbe2ad8" target="_blank" rel="noopener noreferrer" style={{ fontFamily: 'ProtoMono-SemiBold', color: '#45D620' }}>Kroma</a>
+          </div>
         <Scribe />
       </CenteredContainer>
       <Socials />

@@ -1,136 +1,114 @@
 'use client';
 
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   useSendTransaction,
   useWaitForTransaction,
   useAccount,
   useChainId,
 } from 'wagmi';
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { EthscriptionsAPI } from '../utils/scriptionsAPI';
-import { identify, track } from '../utils/analytics';
+import { Progress } from '@nextui-org/react';
+
 
 export function Scribe() {
-  const { data, error, isLoading, isError, sendTransaction } =
-    useSendTransaction();
-
-  const { isLoading: isPending, isSuccess } = useWaitForTransaction({
-    hash: data?.hash,
-  });
-
+  const { data, error, isLoading, isError, sendTransaction } = useSendTransaction();
+  const { isLoading: isPending, isSuccess } = useWaitForTransaction({ hash: data?.hash });
   const chainId = useChainId();
-
   const account = useAccount();
 
-  const [text, setText] = useState('');
-  const [encodedText, setEncodedText] = useState('data:,');
-  const [hex, setHex] = useState('646174613a2c');
+  const [mintAmount, setMintAmount] = useState('1000');
+  const [isInvalidInput, setIsInvalidInput] = useState(false);
+  const [scribeMessage, setScribeMessage] = useState('');
+  const [isScribing, setIsScribing] = useState(false);
+  const [progressVisible, setProgressVisible] = useState(false);
 
-  const onCheckAvailability = useCallback(async () => {
-    const api = new EthscriptionsAPI();
-    const { ownerAddress, isTaken } = await api.checkAvailability(encodedText);
+  const handleMintAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    if (newValue.length <= 4) {
+      setMintAmount(newValue);
+    }
+  };
 
-    track('checked_availability', { text });
+  useEffect(() => {
+    const value = parseInt(mintAmount, 1000);
+    const isInvalid = isNaN(value) || value > 1000 || value === 0 || mintAmount.startsWith('0') || mintAmount.includes('.');
+    setIsInvalidInput(isInvalid);
+  }, [mintAmount]);
 
-    console.log('check availability', ownerAddress, isTaken);
-    const message = isTaken
-      ? `"${text}" text ethscription is already owned by ${ownerAddress}`
-      : `"${text}" ethscription is available! Scribe it below`;
-    alert(message);
-  }, [encodedText, text]);
+  // Dynamically update the fixedScribeInput based on mintAmount
+  const fixedScribeInput = `data:,{"p":"krc-20","op":"mint","tick":"kro","amt":"${mintAmount}"}`;
 
   const onScribe = useCallback(async () => {
     if (!account || !account.isConnected || !account.address) {
-      alert(
-        'You must connect your wallet to scribe, or copy the hex and send the transaction manually'
-      );
+      alert('You must connect your wallet to scribe.');
       return;
     }
 
-    track('scribed', { text, chainId, receiver: account.address });
+    setIsScribing(true);
+    setProgressVisible(true);
 
-    sendTransaction({
-      to: account.address,
-      data: `0x${hex}`,
-    });
-  }, [hex, account, sendTransaction, text, chainId]);
-
-  useEffect(() => {
-    if (!data?.hash) return;
-
-    track('completed_ethscription', { txnHash: data?.hash, chainId });
-  }, [data?.hash, chainId]);
-
-  const onCopyHex = useCallback(() => {
-    navigator.clipboard.writeText(hex);
-
-    track('copied_hex', { text });
-
-    // delay so dom stays focused
+    // Simulate a transaction
     setTimeout(() => {
-      alert(`Copied hex to clipboard: ${hex}`);
-    }, 250);
-  }, [hex, text]);
+      setIsScribing(false);
+      setScribeMessage('Minting complete.');
+      setProgressVisible(false);
+    }, 2000); // Simulated delay for minting
+  
+    try {
+      await sendTransaction({
+        to: account.address,
+        data: `0x${Buffer.from(`data:,{"p":"krc-20","op":"mint","tick":"kro","amt":"${mintAmount}"}`).toString('hex')}`,
+      });
+  
+      if (data && data.hash) {
+        setScribeMessage(`Transaction started. Hash: ${data.hash}`);
+      } else {  
+        setScribeMessage('Transaction failed to start.');
+      }
+    } catch (e) {
+      setScribeMessage(`Error: ${(e as Error).message}`);
+    } finally {
+      setIsScribing(false);
+    }
+  }, [account, mintAmount, sendTransaction, data]);
 
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const text = e.target.value;
-    setText(text);
-    setEncodedText(`data:,${text}`);
-    setHex(Buffer.from(`data:,${text}`).toString('hex'));
-  }, []);
-
-  useEffect(() => {
-    if (!account?.address) return;
-
-    identify(account.address);
-  }, [account.address]);
 
   return (
     <div className="scribe-container">
+      {/* Read-only input displaying the dynamically updated fixedScribeInput */}
+      <Progress aria-label="Loading..." value={60} className="max-w-md"/>
       <input
-        autoFocus
-        className="scribe-input"
-        name="text"
-        placeholder="Text to scribe"
-        onChange={handleChange}
-        value={text}
+        className="input-data-preview"
+        value={fixedScribeInput}
+        readOnly
       />
-      <div className="scribe-encoded-text">{encodedText}</div>
-      <div className="scribe-hex">{hex}</div>
-      {chainId === 1 && (
-        <button
-          className="scribe-button"
-          type="button"
-          onClick={onCheckAvailability}
-        >
-          CHECK AVAILABILITY
-        </button>
-      )}
-      <button className="scribe-button" type="button" onClick={onCopyHex} style={{ backgroundColor: '#45D620', fontFamily: 'ProtoMono-SemiBold' }}>
-        COPY HEX
-      </button>
-      <button className="scribe-button" type="button" onClick={onScribe} style={{ backgroundColor: '#45D620', fontFamily: 'ProtoMono-SemiBold' }}>
-        SCRIBE
+
+      {/* Mint Amount Input */}
+      <input
+        className="mint-amount-input"
+        type="number"
+        value={mintAmount}
+        onChange={handleMintAmountChange}
+        min="1"
+        max="1000" // Set the max value to 9999 for 4 digits
+      />
+
+      <button className="scribe-button" type="button" onClick={onScribe} disabled={isInvalidInput}>
+        START
       </button>
 
-      {isLoading && <div className="scribe-message">Check wallet...</div>}
-      {/* {isPending && (
-        <div className="scribe-message">Transaction pending...</div>
-      )} */}
-      {isSuccess && (
-        <>
-          <div className="scribe-message">
-            Success!{' '}
-            <a href={`https://kromascan.com/tx/${data?.hash}`}>View Txn</a>{' '}
-            <a href={`https://ethscriptions.com/${account?.address}`}>
-              View your Scriptions
-            </a>
-          </div>
-        </>
+      {/* Scribe Message */}
+      {isScribing && <div className="scribe-message">{scribeMessage}</div>}
+
+      {progressVisible && (
+        <Progress 
+          value={10000000 / 21000000 * 100} // Simulated progress value
+          size="lg"
+          color="primary"
+          aria-label="Minting progress"
+        />
       )}
-      {isError && (
-        <div className="scribe-message">Error: {error?.message}</div>
-      )}
+      
       <style jsx>{`
         .scribe-container {
           display: flex;
@@ -142,16 +120,32 @@ export function Scribe() {
           max-width: 85vw;
         }
 
-        .scribe-input {
-          font-size: 16px;
+        .input-data-preview, .mint-amount-input, .mint-invalid-input {
           font-family: monospace;
           margin-bottom: 10px;
-          background-color: #f7f7f7;
-          padding: 10px;
           border-radius: 4px;
           border: none;
           text-overflow: ellipsis;
+          text-align: center;
           overflow: hidden;
+          padding: 10px;
+          height: 27px; /* Set a fixed height */
+        }
+        
+        .input-data-preview {
+          font-size: 12px;
+          background-color: #777777;
+        }
+        
+        .mint-amount-input {
+          font-size: 16px;
+          background-color: #f7f7f7;
+        }
+
+        .mint-invalid-input {
+          font-size: 16px;
+          background-color: #f7f7f7;
+          color: red;
         }
 
         .scribe-encoded-text {
@@ -166,42 +160,40 @@ export function Scribe() {
           overflow: hidden;
         }
 
-        .scribe-hex {
-          font-size: 16px;
-          font-family: monospace;
-          margin-bottom: 10px;
-          background-color: #CBF9BE;
-          padding: 10px;
-          border-radius: 4px;
-          border: none;
-          text-overflow: ellipsis;
-          overflow: hidden;
-        }
-
         .scribe-button {
-          background-color: #4285f4;
+          background-color: #3BB41C;
+          font-size: 24px;
           color: white;
           padding: 10px;
           border: none;
           border-radius: 4px;
           cursor: pointer;
           margin-bottom: 10px;
-          font-family: monospace;
+          font-family: ProtoMono-SemiBold;
         }
 
         .scribe-message {
+          display: flex;
+          flex-direction: column;
+          align-items: center; /* To center-align the items */
+          font-size: 16px;
           margin-top: 20px;
+          color: #EBFF00; // Adjust as needed
           width: 100%;
           text-align: center;
         }
 
-        .scribe-message.success {
-          color: green;
+        .scribe-message.error {
+          display: flex;
+          flex-direction: column;
+          align-items: center; /* To center-align the items */
+          font-size: 16px;
+          margin-top: 20px;
+          color: red;
+          width: 100%;
+          text-align: center;
         }
 
-        .scribe-message.error {
-          color: red;
-        }
       `}</style>
     </div>
   );
