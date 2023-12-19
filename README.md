@@ -1,6 +1,6 @@
-# Scripts
+# Inscripter
 
-Scripts is a simple tool to inscribe text based [ethscriptions](https://ethscriptions.com/). Ethscriptions are a new type of NFT based on ethereum transaction calldata. They are very cheap and easy to mint and share. Scripts is a tool to easily inscribe text based ethscriptions.
+Inscripter is a simple tool to inscribe text based [ethscriptions](https://ethscriptions.com/). Ethscriptions are a new type of NFT based on ethereum transaction calldata. They are very cheap and easy to mint and share. Scripts is a tool to easily inscribe text based ethscriptions.
 
 
 # Environment
