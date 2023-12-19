@@ -12,7 +12,7 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'Text Ethscripter',
+  appName: 'inscripter',
   chains,
   projectId: walletConnectProjectId,
 });

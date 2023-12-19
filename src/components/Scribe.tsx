@@ -1,14 +1,15 @@
 'use client';
-
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { EthscriptionsAPI } from '../utils/scriptionsAPI';
+import {Progress} from "@nextui-org/react";
+import { identify, track } from '../utils/analytics';
 import {
   useSendTransaction,
   useWaitForTransaction,
   useAccount,
   useChainId,
 } from 'wagmi';
-import { Progress } from '@nextui-org/react';
-
 
 export function Scribe() {
   const { data, error, isLoading, isError, sendTransaction } = useSendTransaction();
@@ -23,44 +24,44 @@ export function Scribe() {
   const [progressVisible, setProgressVisible] = useState(false);
 
   const handleMintAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('Detected Mint Amount Changed.')
     const newValue = e.target.value;
     if (newValue.length <= 4) {
       setMintAmount(newValue);
     }
-  };
-
-  useEffect(() => {
-    const value = parseInt(mintAmount, 1000);
+    const value = Number(mintAmount);
     const isInvalid = isNaN(value) || value > 1000 || value === 0 || mintAmount.startsWith('0') || mintAmount.includes('.');
     setIsInvalidInput(isInvalid);
-  }, [mintAmount]);
+    console.log('mintAmount:', mintAmount, 'value:', value, 'isInvalid:', isInvalid);
+  };
 
   // Dynamically update the fixedScribeInput based on mintAmount
   const fixedScribeInput = `data:,{"p":"krc-20","op":"mint","tick":"kro","amt":"${mintAmount}"}`;
 
   const onScribe = useCallback(async () => {
+    console.log('onScribe called');
+    console.log('chainId:', chainId);
     if (!account || !account.isConnected || !account.address) {
       alert('You must connect your wallet to scribe.');
       return;
     }
 
-    setIsScribing(true);
-    setProgressVisible(true);
+    track('ethscribed', { mintAmount, chainId, receiver: account.address });
 
-    // Simulate a transaction
-    setTimeout(() => {
-      setIsScribing(false);
-      setScribeMessage('Minting complete.');
-      setProgressVisible(false);
-    }, 2000); // Simulated delay for minting
-  
     try {
       await sendTransaction({
         to: account.address,
         data: `0x${Buffer.from(`data:,{"p":"krc-20","op":"mint","tick":"kro","amt":"${mintAmount}"}`).toString('hex')}`,
       });
-  
+
+      useEffect(() => {
+        if (!data?.hash) return;
+    
+        track('completed_ethscription', { txnHash: data?.hash, chainId });
+      }, [data?.hash, chainId]);
+
       if (data && data.hash) {
+        console.log('Sribing Data is ...:', data);
         setScribeMessage(`Transaction started. Hash: ${data.hash}`);
       } else {  
         setScribeMessage('Transaction failed to start.');
@@ -75,8 +76,9 @@ export function Scribe() {
 
   return (
     <div className="scribe-container">
+
+
       {/* Read-only input displaying the dynamically updated fixedScribeInput */}
-      <Progress aria-label="Loading..." value={60} className="max-w-md"/>
       <input
         className="input-data-preview"
         value={fixedScribeInput}
@@ -96,18 +98,15 @@ export function Scribe() {
       <button className="scribe-button" type="button" onClick={onScribe} disabled={isInvalidInput}>
         START
       </button>
+      <div className="flex flex-col gap-6 w-full max-w-md">
+                  <Progress size="sm" aria-label="Loading..." value={30} />
+                  <Progress size="md" aria-label="Loading..." value={40} />
+                  <Progress size="lg" aria-label="Loading..." value={50} />
+                </div> 
 
       {/* Scribe Message */}
       {isScribing && <div className="scribe-message">{scribeMessage}</div>}
 
-      {progressVisible && (
-        <Progress 
-          value={10000000 / 21000000 * 100} // Simulated progress value
-          size="lg"
-          color="primary"
-          aria-label="Minting progress"
-        />
-      )}
       
       <style jsx>{`
         .scribe-container {
