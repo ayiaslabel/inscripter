@@ -3,6 +3,7 @@
 # dependencies
 
 /node_modules
+/etc
 /example
 /.pnp
 .pnp.js
@@ -51,3 +52,4 @@ next-env.d.ts
 
 yarn.lock
 package-lock.json
+
