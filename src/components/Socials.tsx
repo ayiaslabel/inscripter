@@ -3,6 +3,7 @@
 import React from 'react';
 import Telegram from './logo/Telegram';
 import Twitter from './logo/Twitter';
+import InscripterLogo from './logo/InscripterLogo';
 
 const Socials: React.FC = () => {
   return (
@@ -30,7 +31,8 @@ const Socials: React.FC = () => {
               rel="noopener noreferrer"
               className="socialLink"
             >
-              <Twitter size={18} />
+              <InscripterLogo size={60} />
+              {/* <Twitter size={18} /> */}
             </a>
           </div>
           <p style={{  fontFamily: 'ProtoMono-SemiBold' }}>Follow @inscripter</p>
@@ -49,14 +51,13 @@ const Socials: React.FC = () => {
           }
 
           .socialLink {
-            width: 28px;
-            height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #818181;
+            border: 3px solid #45D620
+            background-color: #000000;
             border-radius: 50%;
-            margin: 10px 5px;
+            // margin: 10px 5px;
           }
         `}</style>
       </div>

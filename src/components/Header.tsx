@@ -1,9 +1,8 @@
 'use client';
 
-
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Logo } from './Logo';
+import InscripterLogo from './logo/InscripterLogo';
 import MobileHidden from './MobileHidden';
 
 import localFont from 'next/font/local'
@@ -21,8 +20,7 @@ export default function Header() {
     }, []);
 
     return (
-        <header style={{ position: 'fixed', top: 10, left: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', height: 50 }}>
-            <Logo />
+        <header style={{ position: 'fixed', top: 20, left: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', height: 50 }}>
             <div>
             <MobileHidden />
             <nav style={{ display: 'flex', justifyContent: 'center' }}>

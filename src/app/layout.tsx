@@ -1,6 +1,4 @@
-import React from "react";
-import {NextUIProvider} from '@nextui-org/react'
-import {Progress} from "@nextui-org/react";
+import * as React from "react";
 
 import '../../global.css';
 import Head from 'next/head';
@@ -27,13 +25,10 @@ export default function RootLayout({
           <Providers>
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'black', color: 'white', height: '100px' }}>
                 <Header/>
-                <div className="flex flex-col gap-6 w-full max-w-md">
-                  <Progress size="sm" aria-label="Loading..." value={30} />
-                  <Progress size="md" value={40} />
-                  <Progress size="lg" aria-label="Loading..." value={50} />
-                </div> 
               </div>
-              {children}
+              <div style={{ overflowY: 'auto', height: 'calc(100vh - 100px)' }}>
+                {children}
+              </div>
           </Providers>
         </div>
       </body>

@@ -79,15 +79,16 @@ export function Scribe() {
 
 
       {/* Read-only input displaying the dynamically updated fixedScribeInput */}
-      <input
-        className="input-data-preview"
-        value={fixedScribeInput}
-        readOnly
-      />
+      <div className="box-label">Input Data For Mint</div>
+            <input
+              className="input-data-preview"
+              value={fixedScribeInput}
+              readOnly
+            />
+      <div className="box-label">Mint Amount ( Maximum: 1000 )</div>
 
-      {/* Mint Amount Input */}
       <input
-        className="mint-amount-input"
+        className={isInvalidInput ? "mint-invalid-input" : "mint-amount-input"}
         type="number"
         value={mintAmount}
         onChange={handleMintAmountChange}
@@ -96,13 +97,13 @@ export function Scribe() {
       />
 
       <button className="scribe-button" type="button" onClick={onScribe} disabled={isInvalidInput}>
-        START
+        MINT
       </button>
       <div className="flex flex-col gap-6 w-full max-w-md">
-                  <Progress size="sm" aria-label="Loading..." value={30} />
-                  <Progress size="md" aria-label="Loading..." value={40} />
-                  <Progress size="lg" aria-label="Loading..." value={50} />
-                </div> 
+                  <Progress color="primary" size="sm" aria-label="Loading..." value={30} />
+                  <Progress color="primary" size="md" aria-label="Loading..." value={40} />
+                  <Progress color="primary" size="lg" aria-label="Loading..." value={50} />
+      </div> 
 
       {/* Scribe Message */}
       {isScribing && <div className="scribe-message">{scribeMessage}</div>}
@@ -117,6 +118,13 @@ export function Scribe() {
           background-cloor: #CBF9BE;
           width: 475px;
           max-width: 85vw;
+        }
+
+        .box-label {
+          font-size: 16px;
+          margin-bottom: 9px;
+          font-family: ProtoMono-light;
+          color: #EBFF00;
         }
 
         .input-data-preview, .mint-amount-input, .mint-invalid-input {
@@ -134,16 +142,19 @@ export function Scribe() {
         .input-data-preview {
           font-size: 12px;
           background-color: #777777;
+          margin-bottom: 24px;
         }
         
         .mint-amount-input {
           font-size: 16px;
           background-color: #f7f7f7;
+          margin-bottom: 24px;
         }
 
         .mint-invalid-input {
           font-size: 16px;
           background-color: #f7f7f7;
+          margin-bottom: 24px;
           color: red;
         }
 
@@ -167,7 +178,7 @@ export function Scribe() {
           border: none;
           border-radius: 4px;
           cursor: pointer;
-          margin-bottom: 10px;
+          margin-bottom: 36px;
           font-family: ProtoMono-SemiBold;
         }
 

@@ -20,3 +20,11 @@
     font-weight: 300;
     src: url("./public/fonts/ProtoMono-Light.woff2") format("woff2");
   }
+
+  p {
+  display: block;
+    margin-top: 0em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+}
