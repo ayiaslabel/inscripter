@@ -3,6 +3,7 @@ import {NextUIProvider} from '@nextui-org/react'
 import {Progress} from "@nextui-org/react";
 
 import '../../global.css';
+import Head from 'next/head';
 import Header from '../components/Header';
 import '@rainbow-me/rainbowkit/styles.css';
 import { Providers } from './providers';
@@ -16,9 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
+      <Head>
         <link rel="icon" href="/favicon.ico" />
-      </head>
+      </Head>
       <body style={{ backgroundColor: 'black', color: 'white' }}>
 
         <Analytics />

@@ -34,7 +34,7 @@ export function Scribe() {
     setIsInvalidInput(isInvalid);
     console.log('mintAmount:', mintAmount, 'value:', value, 'isInvalid:', isInvalid);
 
-  }, []);
+  }, [mintAmount]);  // <-- Add mintAmount to the dependency array
 
   // Dynamically update the fixedScribeInput based on mintAmount
   const fixedScribeInput = `data:,{"p":"krc-20","op":"mint","tick":"kro","amt":"${mintAmount}"}`;
@@ -56,12 +56,11 @@ export function Scribe() {
       });
 
       useEffect(() => {
+        // This useEffect is triggered when the transaction data changes
         if (!data?.hash) return;
-    
         track('completed_ethscription', { txnHash: data?.hash, chainId });
-          // 트랜잭션 결과 메시지 설정
-          setScribeMessage(data?.hash ? `Transaction started. Hash: ${data.hash}` : 'Transaction failed to start.');
-        }, [data, chainId]);
+        setScribeMessage(data?.hash ? `Transaction started. Hash: ${data.hash}` : 'Transaction failed to start.');
+      }, [data, chainId]);
 
       if (data && data.hash) {
         console.log('Sribing Data is ...:', data);
