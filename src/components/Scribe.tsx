@@ -1,8 +1,7 @@
 'use client';
-import React from 'react';
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { EthscriptionsAPI } from '../utils/scriptionsAPI';
-import {Progress} from "@nextui-org/react";
+import { Progress } from "@nextui-org/react";
 import { identify, track } from '../utils/analytics';
 import {
   useSendTransaction,
@@ -21,59 +20,58 @@ export function Scribe() {
   const [isInvalidInput, setIsInvalidInput] = useState(false);
   const [scribeMessage, setScribeMessage] = useState('');
   const [isScribing, setIsScribing] = useState(false);
-  const [progressVisible, setProgressVisible] = useState(false);
 
-  const handleMintAmountChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleMintAmountChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     if (newValue.length <= 4) {
       setMintAmount(newValue);
     }
 
+    const value = Number(newValue);
+    const isInvalid = isNaN(value) || value > 1000 || value === 0 || newValue.startsWith('0') || newValue.includes('.');
+    setIsInvalidInput(isInvalid);
+
+  }, []);
+
+  useEffect(() => {
     const value = Number(mintAmount);
     const isInvalid = isNaN(value) || value > 1000 || value === 0 || mintAmount.startsWith('0') || mintAmount.includes('.');
     setIsInvalidInput(isInvalid);
-    console.log('mintAmount:', mintAmount, 'value:', value, 'isInvalid:', isInvalid);
 
-  }, [mintAmount]);  // <-- Add mintAmount to the dependency array
+  }, [mintAmount]);
 
-  // Dynamically update the fixedScribeInput based on mintAmount
   const fixedScribeInput = `data:,{"p":"krc-20","op":"mint","tick":"kro","amt":"${mintAmount}"}`;
 
   const onScribe = useCallback(async () => {
-    console.log('onScribe called');
-    console.log('chainId:', chainId);
     if (!account || !account.isConnected || !account.address) {
       alert('You must connect your wallet to scribe.');
       return;
     }
 
-    track('ethscribed', { mintAmount, chainId, receiver: account.address });
+    setIsScribing(true);
 
     try {
+      // Send the transaction
       await sendTransaction({
         to: account.address,
-        data: `0x${Buffer.from(`data:,{"p":"krc-20","op":"mint","tick":"kro","amt":"${mintAmount}"}`).toString('hex')}`,
+        data: `0x${Buffer.from(fixedScribeInput).toString('hex')}`,
       });
-
-      useEffect(() => {
-        // This useEffect is triggered when the transaction data changes
-        if (!data?.hash) return;
-        track('completed_ethscription', { txnHash: data?.hash, chainId });
-        setScribeMessage(data?.hash ? `Transaction started. Hash: ${data.hash}` : 'Transaction failed to start.');
-      }, [data, chainId]);
-
-      if (data && data.hash) {
-        console.log('Sribing Data is ...:', data);
-        setScribeMessage(`Transaction started. Hash: ${data.hash}`);
-      } else {  
-        setScribeMessage('Transaction failed to start.');
-      }
+  
+      // Set a message indicating the transaction is in progress
+      // Note: You'll need to rely on another method to track the actual transaction status
+      setScribeMessage('Transaction in progress...');
     } catch (e) {
       setScribeMessage(`Error: ${(e as Error).message}`);
     } finally {
       setIsScribing(false);
     }
-  }, [account, mintAmount, sendTransaction, data]);
+  }, [account, mintAmount, sendTransaction, fixedScribeInput]);
+
+  useEffect(() => {
+    if (!data?.hash) return;
+    track('completed_ethscription', { txnHash: data?.hash, chainId });
+    // Other logic related to transaction completion
+  }, [data, chainId]);
 
 
   return (
