@@ -23,17 +23,18 @@ export function Scribe() {
   const [isScribing, setIsScribing] = useState(false);
   const [progressVisible, setProgressVisible] = useState(false);
 
-  const handleMintAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('Detected Mint Amount Changed.')
+  const handleMintAmountChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     if (newValue.length <= 4) {
       setMintAmount(newValue);
     }
+
     const value = Number(mintAmount);
     const isInvalid = isNaN(value) || value > 1000 || value === 0 || mintAmount.startsWith('0') || mintAmount.includes('.');
     setIsInvalidInput(isInvalid);
     console.log('mintAmount:', mintAmount, 'value:', value, 'isInvalid:', isInvalid);
-  };
+
+  }, []);
 
   // Dynamically update the fixedScribeInput based on mintAmount
   const fixedScribeInput = `data:,{"p":"krc-20","op":"mint","tick":"kro","amt":"${mintAmount}"}`;
@@ -58,7 +59,9 @@ export function Scribe() {
         if (!data?.hash) return;
     
         track('completed_ethscription', { txnHash: data?.hash, chainId });
-      }, [data?.hash, chainId]);
+          // 트랜잭션 결과 메시지 설정
+          setScribeMessage(data?.hash ? `Transaction started. Hash: ${data.hash}` : 'Transaction failed to start.');
+        }, [data, chainId]);
 
       if (data && data.hash) {
         console.log('Sribing Data is ...:', data);
