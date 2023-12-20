@@ -1,8 +1,8 @@
 'use client';
 import * as React from "react";
-import { NextUIProvider } from '@nextui-org/system'; // 공식 문서에 따라 적절한 모듈을 사용하세요
-
+import { NextUIProvider } from '@nextui-org/system';
 import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
+
 import { WagmiConfig } from 'wagmi';
 import { useMixpanel } from '../utils/analytics';
 import { chains, config } from '../wagmi';
@@ -13,20 +13,20 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   useMixpanel();
 
-  // NextUIProvider를 다른 Provider들의 상위 레벨에 배치
   return (
     <NextUIProvider>
       <WagmiConfig config={config}>
         <RainbowKitProvider
+          locale="en-US"
           theme={darkTheme({
             accentColor: '#45D620',
             accentColorForeground: 'white',
-            borderRadius: 'small',
-            fontStack: 'system',
+            // borderRadius: 'small',
+            fontStack: 'rounded',
             overlayBlur: 'small',
           })}
           chains={chains}
-        >    
+        >
           {mounted && children}
         </RainbowKitProvider>
       </WagmiConfig>

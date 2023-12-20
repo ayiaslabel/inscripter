@@ -1,9 +1,10 @@
+// src/app/page.tsx:
 import * as React from "react";
 import { Progress } from "@nextui-org/progress";
 import Image from 'next/image'
 
 import CenteredContainer from '../components/CenteredContainer';
-import { ConnectButton } from '../components/ConnectButton';
+
 import { Scribe } from '../components/Scribe';
 // import About from '../components/About';
 import Socials from '../components/Socials';
@@ -11,18 +12,6 @@ import Socials from '../components/Socials';
 export default function App() {
   return (
     <>
-      <div
-        style={{
-          position: 'fixed',
-          top: 20,
-          right: 10,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <ConnectButton />
-      </div>
       <CenteredContainer>
         <div>
         <Image src="/images/kuro/krologo120120nobg.png" width={100} height={100} alt="Kuro"/>
@@ -44,9 +33,9 @@ export default function App() {
         <Progress size="md" aria-label="Loading..." value={40} />
         <Progress size="lg" aria-label="Loading..." value={50} />
         {/* <About /> */}
+        <Socials />
 
       </CenteredContainer>
-      <Socials />
     </>
   );
 }
