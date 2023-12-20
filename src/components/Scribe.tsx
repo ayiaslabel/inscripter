@@ -96,9 +96,14 @@ export function Scribe() {
         max="1000" // Set the max value to 9999 for 4 digits
       />
 
-      <button className="scribe-button" type="button" onClick={onScribe} disabled={isInvalidInput}>
+      <button
+        className={isInvalidInput ? "scribe-button-disabled" : "scribe-button"}
+        type="button"
+        onClick={onScribe}
+      >
         MINT
       </button>
+
       <div className="flex flex-col gap-6 w-full max-w-md">
                   <Progress color="primary" size="sm" aria-label="Loading..." value={30} />
                   <Progress color="primary" size="md" aria-label="Loading..." value={40} />
@@ -147,15 +152,15 @@ export function Scribe() {
         
         .mint-amount-input {
           font-size: 16px;
-          background-color: #f7f7f7;
+          background-color: #b1e8a2;
           margin-bottom: 24px;
         }
 
         .mint-invalid-input {
           font-size: 16px;
-          background-color: #f7f7f7;
+          background-color: #b1e8a2;
           margin-bottom: 24px;
-          color: red;
+          color: #f66868;
         }
 
         .scribe-encoded-text {
@@ -171,13 +176,25 @@ export function Scribe() {
         }
 
         .scribe-button {
-          background-color: #3BB41C;
+          background-color: #45D620;
           font-size: 24px;
           color: white;
           padding: 10px;
           border: none;
           border-radius: 4px;
           cursor: pointer;
+          margin-bottom: 36px;
+          font-family: ProtoMono-SemiBold;
+        }
+
+        .scribe-button-disabled {
+          background-color: #ccc; /* 회색 배경 */
+          font-size: 24px;
+          color: #666; /* 회색 글자 */
+          padding: 10px;
+          border: none;
+          border-radius: 4px;
+          cursor: not-allowed; /* 클릭 불가능한 커서 스타일 */
           margin-bottom: 36px;
           font-family: ProtoMono-SemiBold;
         }

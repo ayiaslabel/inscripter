@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import AboutData from '../../public/texts/aboutTexts.tsx';
+// import AboutData from '../../public/texts/aboutTexts.tsx';
 
 const About = () => {
   return (
