@@ -1,47 +1,31 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import * as React from "react";
 import Link from 'next/link';
-import InscripterLogo from './logo/InscripterLogo';
-import MobileHidden from './MobileHidden';
-
-import localFont from 'next/font/local'
- 
-// Font files can be colocated inside of `pages`
-const ProtoMonoSemiBold = localFont({ src: '../../public/fonts/ProtoMono-SemiBold.woff2' })
+import { ConnectButton } from '../components/ConnectButton';
 
 export default function Header() { 
-    const [isClient, setIsClient] = useState(false);
-    const [pathname, setPathname] = useState('');
-
-    useEffect(() => {
-        setIsClient(true);
-        setPathname(window.location.pathname);
-    }, []);
-
     return (
-        <header style={{ position: 'fixed', top: 20, left: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', height: 50 }}>
-            <div>
-            <MobileHidden />
-            <nav style={{ display: 'flex', justifyContent: 'center' }}>
-                <ul style={{ listStyleType: 'none', display: 'flex', justifyContent: 'center', gap: '20px', fontFamily: 'ProtoMono-SemiBold', fontWeight: '600' }}>
-                    {/* <li>
-                        <Link href="/inscriber" style={{ textDecoration: 'none', color: '#ffffff' }} passHref>
-                            <span className="link">INSCRIBER</span>
-                        </Link>
-                    </li> */}
-                    {/* <li>
-                        <Link href="/" style={{ textDecoration: 'none', color: '#ffffff'}} passHref>
-                            <span className="link">SCRIPTS</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/swap" style={{ textDecoration: 'none', color: '#ffffff' }} passHref>
-                            <span className="link">SWAP</span>
-                        </Link>
-                    </li> */}
-                </ul>
+        <header 
+        className="bg-gradient-to-b from-black to-transparent opacity-90 overflow-x-scroll scrollbar-hide"
+        style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            position: 'fixed',
+            width: '100%',
+            height: '60px',
+            top: 0,
+            left: 0,
+        }}>
+            {/* <MobileHidden /> */}
+            <nav style={{ display: 'flex', width: '330px', justifyContent: 'left' }}>
+                <Link href="/About" passHref>
+                    <span className="link" style={{ fontFamily: 'ProtoMono-SemiBold', color: '#ffffff', textDecoration: 'none', justifyContent: 'left' }}>WHAT IS INSCRIPTION?</span>
+                </Link>
             </nav>
+            <div style={{ display: 'flex', justifyContent: 'right' }}>
+                <ConnectButton />
             </div>
         </header>
     );

@@ -7,59 +7,29 @@ import InscripterLogo from './logo/InscripterLogo';
 
 const Socials: React.FC = () => {
   return (
-    <div>
-      <div className={`socials`}>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            flexDirection: 'column',
-          }}
-        >
-          <div style={{ display: 'flex' }}>
-            {/* <a
-              href="https://t.me/inscripterio"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="socialLink"
-            >
-              <Telegram size={15} />
-            </a> */}
-            <a
-              href="https://x.com/inscripter"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="socialLink"
-            >
-              <InscripterLogo size={60} />
-              {/* <Twitter size={18} /> */}
-            </a>
-          </div>
-          <p style={{  fontFamily: 'ProtoMono-SemiBold' }}>Follow @inscripter</p>
+    <div className="flex justify-center items-center bottom-0 left-0 right-0 z-2">
+      <div style={{height:"100%", color:"#000000", opacity:"90%"}}/>
+      <div className="flex flex-col items-center">
+        <div className="flex">
+          {/* <a
+            href="https://t.me/inscripterio"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="socialLink"
+          >
+            <Telegram size={15} />
+          </a> */}
+          <a
+            href="https://x.com/inscripter"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center bg-black rounded-full"
+          >
+            <InscripterLogo size={60} />
+            {/* <Twitter size={18} /> */}
+          </a>
         </div>
-        <style jsx>{`
-          .socials {
-            display: flex;
-            width: 100vw;
-            z-index: 2;
-            position: fixed;
-            bottom: -3px;
-            left: 0px;
-            right: 0px;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .socialLink {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 3px solid #45D620
-            background-color: #000000;
-            border-radius: 50%;
-            // margin: 10px 5px;
-          }
-        `}</style>
+        <p className="font-mono font-semibold">Follow @inscripter</p>
       </div>
     </div>
   );

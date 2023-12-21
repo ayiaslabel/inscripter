@@ -75,15 +75,27 @@ export function Scribe() {
 
 
   return (
-    <div className="scribe-container">
-
-
-      {/* Read-only input displaying the dynamically updated fixedScribeInput */}
-      <div className="box-label">Input Data For Mint</div>
+    <div className="scribe-container" >
+      <div style={{ display: 'flex', alignItems: 'right', justifyContent: 'right', marginTop:"6%", color:'white', fontSize: '18px'}}> 16,421,111,123 / 21,000,000,000
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop:"2%" }}>
+          <Progress
+            size="md"
+            radius="sm"
+            classNames={{
+              base: "max-w-full",
+              track: "drop-shadow-md border border-default",
+                indicator: "bg-gradient-to-r from-blue-500 to-green-500",
+            }}
+            value={65}
+          />
+          </div>
+      <div className="box-label" style={{ marginTop:"6%"}}>Input Data For Mint</div>
             <input
               className="input-data-preview"
               value={fixedScribeInput}
               readOnly
+              style={{height: "20%"}}
             />
       <div className="box-label">Mint Amount ( Maximum: 1000 )</div>
 
@@ -94,6 +106,7 @@ export function Scribe() {
         onChange={handleMintAmountChange}
         min="1"
         max="1000" // Set the max value to 9999 for 4 digits
+        style={{ wordWrap: "break-word" }}
       />
 
       <button
@@ -105,9 +118,6 @@ export function Scribe() {
       </button>
 
       <div className="flex flex-col gap-6 w-full max-w-md">
-                  <Progress color="primary" size="sm" aria-label="Loading..." value={30} />
-                  <Progress color="primary" size="md" aria-label="Loading..." value={40} />
-                  <Progress color="primary" size="lg" aria-label="Loading..." value={50} />
       </div> 
 
       {/* Scribe Message */}
@@ -119,7 +129,7 @@ export function Scribe() {
           display: flex;
           flex-direction: column;
           font-family: monospace;
-          color: black;
+          color: white;
           background-cloor: #CBF9BE;
           width: 475px;
           max-width: 85vw;
@@ -133,7 +143,7 @@ export function Scribe() {
         }
 
         .input-data-preview, .mint-amount-input, .mint-invalid-input {
-          font-family: monospace;
+          font-family: protoMono-light;
           margin-bottom: 10px;
           border-radius: 4px;
           border: none;
@@ -145,7 +155,7 @@ export function Scribe() {
         }
         
         .input-data-preview {
-          font-size: 12px;
+          font-size: 5x;
           background-color: #777777;
           margin-bottom: 24px;
         }

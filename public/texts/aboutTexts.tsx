@@ -1,6 +1,6 @@
-export const aboutTexts = [
+const aboutTexts = [
   {
-    "question": "What is this platform?",
+    "question": "What is KRO?",
     "answer": "This platform serves as a Mint Interface for the First Inscription Token, KRO, on the Kroma Blockchain, providing a user-friendly gateway for engaging with this innovative digital asset."
   },
   {
@@ -40,3 +40,5 @@ export const aboutTexts = [
     "answer": "This information is for general understanding and does not constitute financial advice. Conduct due diligence and be aware of risks in blockchain transactions."
   }
 ];
+
+export default aboutTexts;
