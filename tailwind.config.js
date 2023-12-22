@@ -10,8 +10,26 @@ module.exports = {
     './src/utils/**/*.{js,ts,jsx,tsx,mdx}'
   ],
   theme: {
-    extend: {},
+    extend: {
+      
+    },
   },
   darkMode: "class",
-  plugins: [nextui()]
+  plugins: [    nextui({
+    themes: {
+      light: {
+        colors: {
+          // ... existing colors
+          white: "#FFFFFF", // Define white color
+        },
+      },
+      dark: {
+        colors: {
+          // ... existing colors
+          white: "#FFFFFF", // Define white color in dark theme as well
+        },
+      },
+      // ... rest of the themes
+    },
+  })]
 }

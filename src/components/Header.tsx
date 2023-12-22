@@ -8,16 +8,9 @@ export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
     const menuItems = [
-      "Profile",
-      "Dashboard",
-      "Activity",
-      "Analytics",
-      "System",
-      "Deployments",
-      "My Settings",
-      "Team Settings",
-      "Help & Feedback",
-      "Log Out",
+        { name: "Profile", path: "/profile" },
+        { name: "Dashboard", path: "/dashboard" },
+        { name: "Activity", path: "/activity" },
     ];
 
     return (
@@ -33,14 +26,14 @@ export default function Header() {
             top: 0,
             left: 0,
         }}>
-            <Navbar onMenuOpenChange={setIsMenuOpen} style={{backgroundColor:"black", color:"white", justifyContent:"center"}}>
-            <NavbarContent>
+            <Navbar onMenuOpenChange={setIsMenuOpen} style={{color:"white", justifyContent:"center", backgroundColor:"transparent"}}>
+            <NavbarContent style={{height:"20%"}}>
                 <NavbarMenuToggle
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                className="sm:hidden"
+                // className="sm:hidden"
                 />
             </NavbarContent>
-            <NavbarContent className="hidden sm:flex gap-4" style={{justifyContent:"center"}}>
+            {/* <NavbarContent className="hidden sm:flex gap-4" style={{justifyContent:"center"}}>
                 <NavbarItem>
                 <Link href="#">
                     Features
@@ -56,23 +49,20 @@ export default function Header() {
                     Integrations
                 </Link>
                 </NavbarItem>
-            </NavbarContent>
-             <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
-              }
-              className="w-full"
-              href="#"
-              size="lg"
-            >
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
+            </NavbarContent> */}
+        <NavbarMenu style={{ backgroundColor: "white", width: "10%", maxHeight:"33%"}}>
+            {menuItems.map((menuItem, index) => (
+                <NavbarMenuItem key={`${menuItem.name}-${index}`} style={{ width: "10%" }}>
+                    <Link
+                        style={{ width: "30%", color: index === 2 ? undefined : index === menuItems.length - 1 ? undefined : "#FFFFFF", backgroundColor: "#ffffff" }}
+                        href={menuItem.path} // Update this line
+                        size="lg"
+                    >
+                        {menuItem.name}
+                    </Link>
+                </NavbarMenuItem>
+            ))}
+        </NavbarMenu>
             </Navbar>
             <div style={{ display: 'flex', justifyContent: 'right' }}>
                 <ConnectButton />
