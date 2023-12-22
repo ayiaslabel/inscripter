@@ -27,42 +27,22 @@ export default function Header() {
             left: 0,
         }}>
             <Navbar onMenuOpenChange={setIsMenuOpen} style={{color:"white", justifyContent:"center", backgroundColor:"transparent"}}>
-            <NavbarContent style={{height:"20%"}}>
-                <NavbarMenuToggle
-                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                // className="sm:hidden"
-                />
-            </NavbarContent>
-            {/* <NavbarContent className="hidden sm:flex gap-4" style={{justifyContent:"center"}}>
-                <NavbarItem>
-                <Link href="#">
-                    Features
-                </Link>
-                </NavbarItem>
-                <NavbarItem isActive>
-                <Link href="#" aria-current="page">
-                    Customers
-                </Link>
-                </NavbarItem>
-                <NavbarItem>
-                <Link href="#">
-                    Integrations
-                </Link>
-                </NavbarItem>
-            </NavbarContent> */}
-        <NavbarMenu style={{ backgroundColor: "white", width: "10%", maxHeight:"33%"}}>
-            {menuItems.map((menuItem, index) => (
-                <NavbarMenuItem key={`${menuItem.name}-${index}`} style={{ width: "10%" }}>
-                    <Link
-                        style={{ width: "30%", color: index === 2 ? undefined : index === menuItems.length - 1 ? undefined : "#FFFFFF", backgroundColor: "#ffffff" }}
-                        href={menuItem.path} // Update this line
-                        size="lg"
-                    >
-                        {menuItem.name}
-                    </Link>
-                </NavbarMenuItem>
-            ))}
-        </NavbarMenu>
+                <NavbarContent style={{height:"20%"}}>
+                    <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"}/>
+                </NavbarContent>
+                <NavbarMenu style={{ display:"flex", backgroundColor: "white", width: "10%", maxHeight:"33%", justifyContent:"center"}}>
+                    {menuItems.map((menuItem, index) => (
+                        <NavbarMenuItem key={`${menuItem.name}-${index}`} style={{ width: "10%" }}>
+                            <Link
+                                style={{ width: "30%", color: index === 2 ? undefined : index === menuItems.length - 1 ? undefined : "#FFFFFF", backgroundColor: "#ffffff" }}
+                                href={menuItem.path} // Update this line
+                                size="lg"
+                            >
+                                {menuItem.name}
+                            </Link>
+                        </NavbarMenuItem>
+                    ))}
+                </NavbarMenu>
             </Navbar>
             <div style={{ display: 'flex', justifyContent: 'right' }}>
                 <ConnectButton />
